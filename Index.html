@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanguard Construction | Elite Builders</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --dark: #0a0a0a;
+      --gray: #1a1a1a;
+      --light: #ffffff;
+      --accent: #f0f0f0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--light);
+      overflow-x: hidden;
+      background-color: var(--dark);
+    }
+    
+    /* Video Background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .video-background iframe {
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: grayscale(100%) brightness(0.3) contrast(1.2);
+      pointer-events: none;
+    }
+    
+    /* Content Overlay */
+    .content {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.9) 100%);
+      min-height: 100vh;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      width: 100%;
+      background: rgba(26, 26, 26, 0.95);
+      padding: 1.5rem 3rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    
+    .logo {
+      color: var(--light);
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    
+    .logo span {
+      color: var(--accent);
+    }
+    
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    
+    .hero-content {
+      max-width: 1200px;
+      padding: 0 2rem;
+    }
+    
+    .hero-content h1 {
+      font-size: 4.5rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      line-height: 1.1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.2rem;
+      margin: 1.5rem 0 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    
+    .cta-button {
+      background: transparent;
+      color: var(--light);
+      border: 2px solid var(--light);
+      padding: 14px 45px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button:hover {
+      background: var(--light);
+      color: var(--dark);
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    
+    /* Sections */
+    section {
+      padding: 8rem 2rem;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 5rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 1.5rem auto 0;
+    }
+    
+    /* About Section */
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* Portfolio Section */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .portfolio-card {
+      background: rgba(26, 26, 26, 0.7);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .portfolio-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .card-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .portfolio-card:hover .card-image img {
+      transform: scale(1.05);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 100%);
+    }
+    
+    .card-content {
+      padding: 2rem;
+    }
+    
+    .card-content h3 {
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .card-content p {
+      margin: 0 0 1.5rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+    
+    .project-details {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-details span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .project-btn {
+      background: transparent;
+      color: var(--light);
+      border: none;
+      padding: 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .project-btn:hover {
+      color: var(--accent);
+      gap: 1rem;
+    }
+    
+    /* Contact Section */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: grid;
+      gap: 0.5rem;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+    
+    .form-control {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 1rem;
+      color: var(--light);
+      font-family: inherit;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.15);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: var(--light);
+      color: var(--dark);
+      border: none;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .submit-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--gray);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .social-links a {
+      color: var(--light);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+      
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.5rem;
+      }
+      
+      nav ul {
+        gap: 1.5rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      section {
+        padding: 6rem 1.5rem;
+      }
+      
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 3D Video Background -->
+  <div class="video-background">
+    <iframe 
+      src="https://www.youtube.com/embed/TEjHDF9QXTY?autoplay=1&mute=1&loop=1&playlist=TEjHDF9QXTY&controls=0" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Content Overlay -->
+  <div class="content">
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">VANGUARD<span>CONSTRUCTION</span></div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>BUILDING THE FUTURE</h1>
+        <p>Vanguard Construction delivers innovative, sustainable building solutions with uncompromising quality and precision engineering for commercial and residential projects worldwide.</p>
+        <button class="cta-button">GET STARTED</button>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title" data-aos="fade-up">WHO WE ARE</h2>
+      <div class="about-content" data-aos="fade-up" data-aos-delay="100">
+        <p>Founded in 1995, Vanguard Construction has grown from a regional builder to an international construction leader. Our team of architects, engineers, and craftsmen combine cutting-edge technology with time-honored building techniques to create structures that stand the test of time.</p>
+        <p>We specialize in sustainable construction practices, with over 85% of our projects achieving LEED certification. Our commitment to safety, quality, and client satisfaction has earned us numerous industry awards and a reputation for excellence.</p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2 class="section-title" data-aos="fade-up">OUR PORTFOLIO</h2>
+      <div class="portfolio-grid">
+        <!-- Project 1 - Skyscraper -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-image">
+            <img src="https://cdn.pixabay.com/photo/2014/11/01/18/46/skyscrapers-450793_1280.jpg" alt="Commercial Skyscraper Project">
+            <div class="image-overlay"></div>
+          </div>
+          <div class="card-content">
+            <h3>Downtown Financial Center</h3>
+            <p>45-story commercial tower with LEED Platinum certification and state-of-the-art seismic reinforcement</p>
+            <div class="project-details">
+              <span><i class="fas fa-ruler-combined"></i> 850,000 sq ft</span>
+              <span><i class="fas fa-calendar-alt"></i> Completed 2023</span>
+            </div>
+            <button class="project-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 2 - Interior -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-image">
+            <img src="https://cdn.pixabay.com/photo/2019/05/15/14/22/interior-4226020_1280.jpg" alt="Luxury Interior Project">
+            <div class="image-overlay"></div>
+          </div>
+          <div class="card-content">
+            <h3>Luxury Urban Penthouse</h3>
+            <p>High-end finishes and custom millwork in this award-winning residential interior project</p>
+            <div class="project-details">
+              <span><i class="fas fa-ruler-combined"></i> 6,500 sq ft</span>
+              <span><i class="fas fa-calendar-alt"></i> Completed 2022</span>
+            </div>
+            <button class="project-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Project 3 - Residential -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-image">
+            <img src="https://cdn.pixabay.com/photo/2017/06/16/15/58/luxury-home-2409518_1280.jpg" alt="Modern Residential Project">
+            <div class="image-overlay"></div>
+          </div>
+          <div class="card-content">
+            <h3>Coastal Modern Estate</h3>
+            <p>Custom smart home with sustainable materials and hurricane-resistant design</p>
+            <div class="project-details">
+              <span><i class="fas fa-ruler-combined"></i> 12,000 sq ft</span>
+              <span><i class="fas fa-calendar-alt"></i> Completed 2021</span>
+            </div>
+            <button class="project-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 class="section-title" data-aos="fade-up">GET IN TOUCH</h2>
+      <form class="contact-form" data-aos="fade-up" data-aos-delay="100">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="project">Project Type</label>
+          <select id="project" class="form-control">
+            <option value="">Select project type</option>
+            <option value="commercial">Commercial Construction</option>
+            <option value="residential">Residential Construction</option>
+            <option value="renovation">Renovation</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Project Details</label>
+          <textarea id="message" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">SUBMIT REQUEST</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="logo">VANGUARD<span>CONSTRUCTION</span></div>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">© 2024 Vanguard Construction. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize animations
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out'
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Update URL without page reload
+          if (history.pushState) {
+            history.pushState(null, null, targetId);
+          } else {
+            window.location.hash = targetId;
+          }
+        }
+      });
+    });
+
+    // Video background optimization
+    const video = document.querySelector('.video-background iframe');
+    let isVideoPlaying = true;
+
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        // Pause video when tab is inactive
+        video.src = video.src.replace("&autoplay=1", "");
+        isVideoPlaying = false;
+      } else if (!isVideoPlaying) {
+        // Resume video when tab is active again
+        video.src += "&autoplay=1";
+        isVideoPlaying = true;
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Project card buttons
+    document.querySelectorAll('.project-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // In a real implementation, this would open a project modal or page
+        alert('Project case study would open here in a full implementation.');
+      });
+    });
+  </script>
+</body>
+</html>
