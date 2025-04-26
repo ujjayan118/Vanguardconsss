@@ -1,0 +1,97 @@
+/* Base Styles */
+:root {
+  --primary: #2a4365; /* Navy Blue */
+  --accent: #ecc94b; /* Gold */
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Parallax Sections */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), url('construction-hero.jpg');
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cta-button {
+  background: var(--accent);
+  padding: 12px 30px;
+  border-radius: 4px;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.divider-1 {
+  background-image: url('construction-site.jpg');
+  height: 60vh;
+}
+
+/* Projects Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  nav ul { display: none; } /* Replace with hamburger menu */
+}
